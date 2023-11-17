@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { MyDrawer } from "@/components/drawer";
+import { MyDrawer } from "@/components/drawer/drawer";
 import { ModeToggle } from "@/components/mode-toggle";
-import { DrawerContent } from '@/components/drawerContent';
+import { DrawerContent } from '@/components/drawer/drawerContent';
 import { Input } from "@/components/ui/input";
 import { Header } from "@/components/header";
 import { CountriesList, CountryData } from "@/components/countriesList";
@@ -42,7 +42,7 @@ export default function Home() {
 
 
     return (
-        <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[90vh]">
+        <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[100vh]">
             <div style={{ position: 'fixed', top: '1rem', right: '1rem' }}>
                 <ModeToggle />
             </div>

@@ -5,8 +5,10 @@ import Home from "./pages/home"
 function App() {
 
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Home/>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme ">
+      <div vaul-drawer-wrapper="" className="bg-background">
+        <Home/>
+      </div>
     </ThemeProvider>
 
   )
