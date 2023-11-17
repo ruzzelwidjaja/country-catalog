@@ -3,13 +3,13 @@ import React from 'react';
 
 type searchInputProps = {
   inputValue: string;
-  isValid: boolean;
+  // isValid: boolean;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   clearInput: () => void;
 };
 
 // export const Input: React.FC<searchInputProps> = ({ inputValue, isValid, handleInputChange }) => {
-export const Input: React.FC<searchInputProps> = ({ inputValue, isValid, handleInputChange, clearInput }) => {
+export const Input: React.FC<searchInputProps> = ({ inputValue, handleInputChange, clearInput }) => {
     return (
     <div className="relative w-full mr-1.5">
 
@@ -24,8 +24,8 @@ export const Input: React.FC<searchInputProps> = ({ inputValue, isValid, handleI
         onChange={handleInputChange}
         className={`text-primary text-[0.9rem] w-full p-[0.4512rem] rounded-md pl-[2.15rem] bg-background placeholder-muted-foreground 
                     border-2 border-grey focus:border-indigo-500 focus:outline-none focus:bg-bgHover
-                    hover:bg-bgHover hover:border-[#9e8cfc]
-                    ${!isValid && 'border-red-500'}`}
+                    hover:bg-bgHover hover:border-[#9e8cfc]`}
+                    // ${!isValid && 'border-red-500'}`}
         placeholder="Search for a country"
       />
 

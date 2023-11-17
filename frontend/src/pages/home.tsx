@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { MyDrawer } from "@/components/drawer/drawer";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -14,7 +14,11 @@ export default function Home() {
 
     const [inputValue, setInputValue] = useState('');
     const [filteredCountries, setFilteredCountries] = useState<CountriesListType[]>([]);
-    const [isValid, setIsValid] = useState(true); // valid country or not
+
+    // States to validate country in input field
+    const [isValid, setIsValid] = useState(true); // Disable button
+    // const [isInputValid, setIsInputValid] = useState(true); // Warning message & red border
+
     const [countryDetails, setCountryDetails] = useState<CountryDetailsType | null>(null);
 
 
@@ -34,12 +38,21 @@ export default function Home() {
         setInputValue('');
         setFilteredCountries([]);
     };
+
+    // Update isValid whenever inputValue changes
+    useEffect(() => {
+        const isValidCountry = inputValue !== '' && countries_list.some(country => 
+            country.name.toLowerCase() === inputValue.toLowerCase()
+        );
+        setIsValid(isValidCountry);
+    }, [inputValue]);
     
     // When a country is clicked from the drop-down list
     const handleCountryClick = (country: string) => {
         setInputValue(country);
         setFilteredCountries([]); // to clear the dropdown list
         setIsValid(true); // to reset validation state when a country is clicked
+        // setIsInputValid(true);
     }
 
     // When the button is clicked
@@ -62,6 +75,7 @@ export default function Home() {
             }
         } else {
             setIsValid(false);
+            // setIsInputValid(false);
             setCountryDetails(null); // Reset or handle invalid country
         }
     }, [inputValue]);
@@ -77,11 +91,11 @@ export default function Home() {
                 <div className="flex mb-2">
                     <Input 
                         inputValue={inputValue} 
-                        isValid={isValid} 
+                        // isValid={isInputValid} 
                         handleInputChange={handleInputChange} 
                         clearInput={clearInput}
                     />
-                    <MyDrawer onButtonClick={handleButtonClick} countryDetails={countryDetails}/>
+                    <MyDrawer onButtonClick={handleButtonClick} countryDetails={countryDetails} isValid={isValid}/>
                 </div>
                 <CountriesList filteredCountries={filteredCountries} handleCountryClick={handleCountryClick} />
             </form>

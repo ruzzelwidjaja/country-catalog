@@ -9,9 +9,10 @@ import { CountryDetailsType } from "@/lib/types";
 interface DrawerProps {
   countryDetails: CountryDetailsType | null;
   onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isValid: boolean;
 }
 
-export function MyDrawer({ onButtonClick, countryDetails}: DrawerProps) {
+export function MyDrawer({ onButtonClick, countryDetails, isValid}: DrawerProps) {
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
@@ -20,6 +21,7 @@ export function MyDrawer({ onButtonClick, countryDetails}: DrawerProps) {
           size="icon" 
           className='w-14 border-2 focus:border-[#9e8cfc] focus:outline-none hover:border-[#9e8cfc]'
           onClick={onButtonClick}
+          disabled={!isValid}
         >
           <ChevronRight className="h-6 w-6" />
         </Button>
