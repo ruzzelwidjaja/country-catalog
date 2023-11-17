@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+.DropdownMenuContent {
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+  animation: scaleIn 0.5s ease-out;
+}
