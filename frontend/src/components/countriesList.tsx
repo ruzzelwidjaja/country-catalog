@@ -1,12 +1,8 @@
+import { CountriesListType } from '@/lib/types';
 import React from 'react';
 
-export type CountryData = {
-    name: string;
-    continent: string;
-  };
-
 type CountriesListProps = {
-  filteredCountries: CountryData[];
+  filteredCountries: CountriesListType[];
   handleCountryClick: (country: string) => void;
 };
 
