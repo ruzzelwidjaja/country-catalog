@@ -6,8 +6,11 @@ import { Footer } from "./footer";
 
 import { CountryDetailsType } from "@/lib/types";
 
+interface DrawerContentProps {
+  countryDetails: CountryDetailsType | null;
+}
 
-export function DrawerContent({countryDetails}: { countryDetails: CountryDetailsType | null}) {
+export function DrawerContent({ countryDetails }: DrawerContentProps) {
   // Function to get the currency and its symbol
   const getCurrencyInfo = (currencies: { [key: string]: { name: string; symbol: string } }) => {
     const entries = Object.entries(currencies || {});
@@ -17,18 +20,15 @@ export function DrawerContent({countryDetails}: { countryDetails: CountryDetails
     return `${currencyCode} (${symbol})`;
   };
 
-
   return (
+
     <Drawer.Content className="geist-font bg-zinc-100 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0">
-        
-      
       <div className="p-4 bg-background rounded-t-[10px] flex-1">
         <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-500 mb-8" />
         <div className="max-w-sm mx-auto md:max-w-xl px-2">
           <Header countryDetails={countryDetails}/>
 
           {/* Body */}
-
           <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2">
             <InfoItem label="Region" value={countryDetails?.region ?? "Unknown"} />
             <InfoItem label="Currency" value={getCurrencyInfo(countryDetails?.currencies ?? {})} />

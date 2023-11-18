@@ -4,6 +4,7 @@ import { ChevronRight } from 'lucide-react';
 import { DrawerContent } from './drawerContent';
 
 import { CountryDetailsType } from "@/lib/types";
+import { DrawerContentSkeleton } from "./drawerContentSkeleton";
 
 
 interface DrawerProps {
@@ -12,7 +13,7 @@ interface DrawerProps {
   isValid: boolean;
 }
 
-export function MyDrawer({ onButtonClick, countryDetails, isValid}: DrawerProps) {
+export function MyDrawer({ onButtonClick, countryDetails, isValid }: DrawerProps) {
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
@@ -24,11 +25,15 @@ export function MyDrawer({ onButtonClick, countryDetails, isValid}: DrawerProps)
           disabled={!isValid}
         >
           <ChevronRight className="h-6 w-6" />
-        </Button>
+        </Button> 
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <DrawerContent countryDetails={countryDetails}/>
+        {countryDetails === null
+          ? <DrawerContentSkeleton />
+          : <DrawerContent countryDetails={countryDetails}/>
+        }
+        {/* <DrawerContentSkeleton/> */}
       </Drawer.Portal>
     </Drawer.Root>
   );
