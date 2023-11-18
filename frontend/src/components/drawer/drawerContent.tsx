@@ -1,63 +1,59 @@
 import { Drawer } from "vaul";
+import { Tooltip } from "../ui/tooltip";
+import { Header } from "./header";
+import { InfoItem } from "./infoItem";
+import { Footer } from "./footer";
+
 import { CountryDetailsType } from "@/lib/types";
 
-export function DrawerContent({countryDetails}: { countryDetails: CountryDetailsType | null}) {
-// export function DrawerContent() {
 
-  // if (!countryDetails) return null;
+export function DrawerContent({countryDetails}: { countryDetails: CountryDetailsType | null}) {
+  // Function to get the currency and its symbol
+  const getCurrencyInfo = (currencies: { [key: string]: { name: string; symbol: string } }) => {
+    const entries = Object.entries(currencies || {});
+    if (entries.length === 0) return "Unknown";
+
+    const [currencyCode, { symbol }] = entries[0];
+    return `${currencyCode} (${symbol})`;
+  };
 
 
   return (
     <Drawer.Content className="bg-zinc-100 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0">
         
-      {/* Header */}
+      
       <div className="p-4 bg-background rounded-t-[10px] flex-1">
         <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-500 mb-8" />
-        <div className="max-w-md mx-auto">
-          <Drawer.Title className="font-medium mb-4">
-            Unstyled drawer for React.
-            {countryDetails
-                ? countryDetails.name.common
-                : "HELLO"}            
-          </Drawer.Title>
-          
+        <div className="max-w-sm mx-auto md:max-w-xl px-2">
+          <Header countryDetails={countryDetails}/>
+
           {/* Body */}
-          <p className="text-zinc-600 mb-2">
-            This component can be used as a replacement for a Dialog on
-            mobile and tablet devices.
-          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 gap-2 mb-6">
+            <InfoItem label="Region" value={countryDetails?.region ?? "Unknown"} />
+            <InfoItem label="Currency" value={getCurrencyInfo(countryDetails?.currencies ?? {})} />
+            <InfoItem label={<Tooltip text="United Nations Member?">UN Member</Tooltip>} value={countryDetails?.unMember ? "Yes" : "No"} />
+            <InfoItem label="Population" value={countryDetails?.population.toLocaleString() ?? "Unknown"} />
+            <InfoItem label="Dial Code" value={`${countryDetails?.idd.root ?? ""}${countryDetails?.idd.suffixes[0] ?? ""}`} />
+            <InfoItem label="Total Area" value={`${countryDetails?.area.toLocaleString() ?? "Unknown"} km²`} />
+          </div>
+
+          <hr className="mb-6 w-11/12 mx-auto"/>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 gap-4">
+            <InfoItem label="ISO Country Code" value={countryDetails?.cca2 ?? "Unknown"} />
+            <InfoItem label={<Tooltip text="Top-Level Domain">TLD</Tooltip>} value={countryDetails?.tld[0] ?? "Unknown"} />
+            <InfoItem label="FIFA Code" value={countryDetails?.fifa ?? "Unknown"} />
+            <InfoItem label="Timezone" value={countryDetails?.timezones[0] ?? "Unknown"} />
+            <InfoItem label="Independence" value={countryDetails?.independent ? "Yes" : "No"} />
+            <InfoItem label="Car Side" value={countryDetails?.car.side ?? "Unknown"} />
+          </div>
 
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="p-4 bg-zinc-100 border-t border-zinc-200 mt-auto">
-        <div className="flex gap-6 justify-end max-w-md mx-auto">
-          <a
-            className="text-xs text-zinc-600 flex items-center gap-0.25"
-            href="https://github.com/ruzzelwidjaja/country-search"
-            target="_blank"
-          >
-            GitHub
-            <svg
-              fill="none"
-              height="16"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              width="16"
-              aria-hidden="true"
-              className="w-3 h-3 ml-1"
-            >
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-              <path d="M15 3h6v6"></path>
-              <path d="M10 14L21 3"></path>
-            </svg>
-          </a>
-        </div>
-      </div>
+
+      <Footer/>
     </Drawer.Content>
   )
 }

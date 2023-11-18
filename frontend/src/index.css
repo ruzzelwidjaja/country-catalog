@@ -10,6 +10,7 @@
     --foreground: 0 0% 11%;
 
     --hover-bg: #f1eff7;
+    --hover-bg2: #251e40;
 
     /* --gray for light mode */
     --grayLD: 240, 3.8%, 46.1%;
@@ -49,6 +50,7 @@
     --foreground: 30 33% 96%; /* lightbeige hsl(30 33% 96%) */
 
     --hover-bg: #251e40;
+    --hover-bg2: #f1eff7;
 
     /* --gray for dark mode */
     --grayLD: 240, 4.6%, 74.5%;
