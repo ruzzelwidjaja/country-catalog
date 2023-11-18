@@ -29,11 +29,11 @@ export function MyDrawer({ onButtonClick, countryDetails, isValid }: DrawerProps
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        {countryDetails === null
+        {/* {countryDetails === null
           ? <DrawerContentSkeleton />
           : <DrawerContent countryDetails={countryDetails}/>
-        }
-        {/* <DrawerContentSkeleton/> */}
+        } */}
+        <DrawerContentSkeleton/>
       </Drawer.Portal>
     </Drawer.Root>
   );
