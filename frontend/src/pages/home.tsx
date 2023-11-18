@@ -8,6 +8,7 @@ import { CountriesList } from "@/components/countriesList";
 
 import { countries_list } from "@/lib/config/countries_list";
 import { CountriesListType, CountryDetailsType } from "@/lib/types";
+import { fetchCountryData } from "@/lib/cache";
 
 
 export default function Home() {
@@ -58,17 +59,11 @@ export default function Home() {
         );
 
         if (isValidCountry) {
-            try {
-                const response = await fetch(`http://localhost:3001/country/${inputValue}`);
-                if (!response.ok) { //test
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                console.log("TEST::::::", data[0])
+            setCountryDetails(null); // Reset to show loading state (skeleton)
 
-                setCountryDetails(data[0]);
-                // await delay(1000);
-                // setIsLoading(false);
+            try {
+                const data = await fetchCountryData(inputValue);
+                setCountryDetails(data);
             } catch (error) {
                 console.error("Error fetching country details: ", error);
             }
