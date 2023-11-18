@@ -7,7 +7,7 @@ interface InfoItemProps {
 
 export const InfoItem: React.FC<InfoItemProps> = ({ label, value }) => {
   return (
-    <div className="p-4 rounded-[14px] hover:bg-bgHover">
+    <div className="px-6 py-4 rounded-[14px] hover:bg-bgHover">
       <p className='text-grayLD'>{label}</p>
       <p className='font-semibold'>{value}</p>
     </div>

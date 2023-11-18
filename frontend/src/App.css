@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 0rem;
   text-align: center;
+  font-family: 'Geist', sans-serif;
+  font-weight: normal;
 }
 
 .logo {
@@ -46,6 +48,31 @@
   opacity: 1;
 }
 
+/* Fonts */
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-Regular.woff2') format('woff2'),
+       url('./fonts/Geist-Regular.otf') format('opentype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-SemiBold.woff2') format('woff2'),
+       url('./fonts/Geist-SemiBold.otf') format('opentype');
+  font-weight: 600; /* Semi-Bold */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist-Bold.woff2') format('woff2'),
+       url('./fonts/Geist-Bold.otf') format('opentype');
+  font-weight: bold;
+}
+
+.geist-font {
+  font-family: 'Geist', sans-serif;
+}
 
 @keyframes logo-spin {
   from {
@@ -73,4 +100,5 @@
 .DropdownMenuContent {
   transform-origin: var(--radix-dropdown-menu-content-transform-origin);
   animation: scaleIn 0.5s ease-out;
+  
 }

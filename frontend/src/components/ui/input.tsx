@@ -23,9 +23,8 @@ export const Input: React.FC<searchInputProps> = ({ inputValue, handleInputChang
         value={inputValue}
         onChange={handleInputChange}
         className={`text-primary text-[0.9rem] w-full p-[0.4512rem] rounded-md pl-[2.15rem] bg-background placeholder-muted-foreground 
-                    border-2 border-grey focus:border-indigo-500 focus:outline-none focus:bg-bgHover
+                    border-2 border-input focus:border-indigo-500 focus:outline-none focus:bg-bgHover
                     hover:bg-bgHover hover:border-[#9e8cfc]`}
-                    // ${!isValid && 'border-red-500'}`}
         placeholder="Search for a country"
       />
 

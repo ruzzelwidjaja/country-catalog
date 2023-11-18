@@ -19,7 +19,7 @@ export function DrawerContent({countryDetails}: { countryDetails: CountryDetails
 
 
   return (
-    <Drawer.Content className="bg-zinc-100 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0">
+    <Drawer.Content className="geist-font bg-zinc-100 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0">
         
       
       <div className="p-4 bg-background rounded-t-[10px] flex-1">
@@ -29,7 +29,7 @@ export function DrawerContent({countryDetails}: { countryDetails: CountryDetails
 
           {/* Body */}
 
-          <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 gap-2 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2">
             <InfoItem label="Region" value={countryDetails?.region ?? "Unknown"} />
             <InfoItem label="Currency" value={getCurrencyInfo(countryDetails?.currencies ?? {})} />
             <InfoItem label={<Tooltip text="United Nations Member?">UN Member</Tooltip>} value={countryDetails?.unMember ? "Yes" : "No"} />
@@ -38,12 +38,12 @@ export function DrawerContent({countryDetails}: { countryDetails: CountryDetails
             <InfoItem label="Total Area" value={`${countryDetails?.area.toLocaleString() ?? "Unknown"} km²`} />
           </div>
 
-          <hr className="mb-6 w-11/12 mx-auto"/>
+          <hr className="my-4 w-11/12 mx-auto"/>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 gap-4">
-            <InfoItem label="ISO Country Code" value={countryDetails?.cca2 ?? "Unknown"} />
+          <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 mb-4">
+            <InfoItem label="ISO Code" value={countryDetails?.cca2 ?? "Unknown"} />
             <InfoItem label={<Tooltip text="Top-Level Domain">TLD</Tooltip>} value={countryDetails?.tld[0] ?? "Unknown"} />
-            <InfoItem label="FIFA Code" value={countryDetails?.fifa ?? "Unknown"} />
+            <InfoItem label="FIFA Code" value={countryDetails?.fifa ?? "N/A"} />
             <InfoItem label="Timezone" value={countryDetails?.timezones[0] ?? "Unknown"} />
             <InfoItem label="Independence" value={countryDetails?.independent ? "Yes" : "No"} />
             <InfoItem label="Car Side" value={countryDetails?.car.side ?? "Unknown"} />
