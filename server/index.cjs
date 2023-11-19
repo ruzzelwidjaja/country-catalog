@@ -1,12 +1,18 @@
 require('dotenv').config();
 
+// import dotenv from 'dotenv';
+// dotenv.config();
+
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
+// import express from 'express';
+// import axios from 'axios';
+// import cors from 'cors';
+
 const app = express();
 // const port = process.env.PORT || 3001;
 const port = process.env.PORT;
-console.log('TEST', process.env)
-const cors = require('cors');
 
 app.use(cors());
 
