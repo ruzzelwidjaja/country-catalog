@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/home/theme-provider"
 import './App.css'
 import Home from "./pages/home"
 

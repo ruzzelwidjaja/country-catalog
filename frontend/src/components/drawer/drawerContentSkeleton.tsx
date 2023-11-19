@@ -3,8 +3,8 @@ import { Drawer } from "vaul";
 function InfoItemSkeleton () {
   return (
     <div className="mx-6 my-[0.9rem] rounded-[14px]">
-      <div className='mb-3 bg-gray-300 dark:bg-gray-700 rounded h-5 w-8/12 animate-pulse'></div>
-      <div className='bg-gray-300 dark:bg-gray-600 rounded h-5 w-8/12 animate-pulse'></div>
+      <div className='mb-3 bg-gray-200 dark:bg-gray-700 rounded h-5 w-8/12 animate-pulse'></div>
+      <div className='bg-gray-200 dark:bg-gray-600 rounded h-5 w-8/12 animate-pulse'></div>
     </div>
   )
 }
@@ -12,14 +12,14 @@ function InfoItemSkeleton () {
 
 export function DrawerContentSkeleton() {
     return (
-      <Drawer.Content className="bg-zinc-100 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0">
+      <Drawer.Content className="bg-zinc-200 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0">
         <div className="p-4 bg-background rounded-t-[10px] flex-1">
           <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-500 mb-4" />
           <div className="max-w-sm mx-auto md:max-w-xl px-2">
             <header className="p-4 pb-0">
               {/* Name and Flag Skeleton */}
               <div className="flex justify-between items-center mr-4 pl-4">
-                <div className="pr-5 w-1/2 bg-gray-300 dark:bg-gray-600 rounded h-8 animate-pulse"></div>
+                <div className="pr-5 w-1/2 bg-gray-200 dark:bg-gray-600 rounded h-8 animate-pulse"></div>
                 <div className="w-16 h-10 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
               </div>
               
@@ -31,7 +31,7 @@ export function DrawerContentSkeleton() {
               {/* Languages Skeleton */}
               <div className="ml-2 flex">
                 <div className="mr-6 bg-gray-300 dark:bg-gray-700 rounded h-4 w-3/12 animate-pulse"></div>
-                <div className="bg-gray-300 dark:bg-gray-600 rounded h-4 w-1/2 animate-pulse"></div>
+                <div className="bg-gray-200 dark:bg-gray-600 rounded h-4 w-1/2 animate-pulse"></div>
               </div>
 
               <hr className="mt-5 mb-4 w-11/12 mx-auto"/>

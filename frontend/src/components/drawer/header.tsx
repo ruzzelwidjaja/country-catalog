@@ -40,7 +40,7 @@ export function Header({countryDetails}: { countryDetails: CountryDetailsType | 
         </span>
       </div>
 
-      <hr className="my-4 w-11/12 mx-auto"/>
+      <hr className="mt-4 mb-3 w-11/12 mx-auto"/>
     </header>
   );
 }

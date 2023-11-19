@@ -56,20 +56,6 @@
   font-weight: normal;
 }
 
-@font-face {
-  font-family: 'Geist';
-  src: url('./fonts/Geist-SemiBold.woff2') format('woff2'),
-       url('./fonts/Geist-SemiBold.otf') format('opentype');
-  font-weight: 600; /* Semi-Bold */
-}
-
-@font-face {
-  font-family: 'Geist';
-  src: url('./fonts/Geist-Bold.woff2') format('woff2'),
-       url('./fonts/Geist-Bold.otf') format('opentype');
-  font-weight: bold;
-}
-
 .geist-font {
   font-family: 'Geist', sans-serif;
 }

@@ -5,6 +5,7 @@ import { InfoItem } from "./infoItem";
 import { Footer } from "./footer";
 
 import { CountryDetailsType } from "@/lib/types";
+import { Links } from "./links";
 
 interface DrawerContentProps {
   countryDetails: CountryDetailsType | null;
@@ -38,7 +39,7 @@ export function DrawerContent({ countryDetails }: DrawerContentProps) {
             <InfoItem label="Total Area" value={`${countryDetails?.area.toLocaleString() ?? "Unknown"} km²`} />
           </div>
 
-          <hr className="my-4 w-11/12 mx-auto"/>
+          <hr className="my-3 w-11/12 mx-auto"/>
           
           <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 mb-4">
             <InfoItem label="ISO Code" value={countryDetails?.cca2 ?? "Unknown"} />
@@ -49,6 +50,9 @@ export function DrawerContent({ countryDetails }: DrawerContentProps) {
             <InfoItem label="Car Side" value={countryDetails?.car.side ?? "Unknown"} />
           </div>
 
+          <hr className="mt-4 mb-[1.05rem] w-11/12 mx-auto"/>
+
+          <Links countryDetails={countryDetails} />
         </div>
       </div>
 

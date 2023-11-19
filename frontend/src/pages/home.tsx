@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { MyDrawer } from "@/components/drawer/drawer";
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/components/home/mode-toggle";
 import { Input } from "@/components/ui/input";
-import { Header } from "@/components/header";
-import { CountriesList } from "@/components/countriesList";
+import { Header } from "@/components/home/header";
+import { CountriesList } from "@/components/home/countriesList";
 
 import { countries_list } from "@/lib/config/countries_list";
 import { CountriesListType, CountryDetailsType } from "@/lib/types";
