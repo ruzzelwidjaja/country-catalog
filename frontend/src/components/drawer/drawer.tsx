@@ -17,7 +17,8 @@ export function MyDrawer({ onButtonClick, countryDetails, isValid }: DrawerProps
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
-        <Button 
+        <Button
+          testId="drawer-button"
           variant="outline" 
           size="icon" 
           className='w-14 border-2 focus:border-[#9e8cfc] focus:outline-none hover:border-[#9e8cfc]'
