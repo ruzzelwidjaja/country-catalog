@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
         <div className="flex gap-6 justify-end max-w-md mx-auto">
           <a
             className="text-xs text-zinc-600 dark:text-zinc-400 flex items-center gap-0.25"
-            href="https://github.com/ruzzelwidjaja/country-search"
+            href="https://github.com/ruzzelwidjaja/country-catalog"
             target="_blank"
           >
             GitHub
