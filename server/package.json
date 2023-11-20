@@ -2,10 +2,10 @@
     "name": "country-catalog-server",
     "version": "1.0.0",
     "description": "",
-    "main": "index.cjs",
+    "main": "index.js",
     "scripts": {
       "test": "jest",
-      "start": "nodemon index.cjs"
+      "start": "nodemon index.js"
     },
     "keywords": [],
     "author": "",
