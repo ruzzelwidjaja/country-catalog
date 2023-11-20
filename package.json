@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "client": "cd client && npm start",
+    "client": "cd client && npm run dev",
     "server": "cd server && npm start",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
     "install-all": "npm run install-client && npm run install-server",
