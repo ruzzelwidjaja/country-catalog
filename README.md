@@ -2,11 +2,13 @@
 
 Country Catalog is a web application that allows users to search for countries and access detailed information about them. It combines a sleek frontend interface with a robust backend to deliver relevant data efficiently.
 
+Link to project: 
+[https://countrycatalog.vercel.app/](https://countrycatalog.vercel.app/)
 ## 🎥 Demos 
 
 <div style="display: flex; justify-content: space-around;">
-  <img src="./readmeDemo/wide.gif" alt="Demo Wide" width="572" />
-  <img src="./readmeDemo/mobile.gif" alt="Demo Mobile" width="192" />
+  <img src="./readme-demo/wide.gif" alt="Demo Wide" width="508" />
+  <img src="./readme-demo/mobile.gif" alt="Demo Mobile" width="192" />
 </div>
 
 ## 🌟 Features 
