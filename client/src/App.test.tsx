@@ -1,37 +1,41 @@
-import {render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from "./App";
 import Home from './pages/home';
 
-it("should have country catalog", () =>{
-    render(<App/>)
-    const message = screen.queryByText(/country catalog/i)
-    expect(message).toBeVisible();
-})
+describe("App Component Tests", () => {
+  it("should display the 'Country Catalog' title", () => {
+    render(<App />);
+    const titleElement = screen.getByText(/country catalog/i);
+    expect(titleElement).toBeInTheDocument();
+  });
 
-it('renders dropdown list when typing Canada', async () => {
-    render(<Home />);
-    const inputField = screen.getByRole('textbox');
-    fireEvent.change(inputField, { target: { value: 'Canada' } });
+  describe("Home Component Tests", () => {
+    it('renders dropdown list when typing "Canada"', async () => {
+      render(<Home />);
+      const inputField = screen.getByRole('textbox');
+      fireEvent.change(inputField, { target: { value: 'Canada' } });
 
-    const dropdownList = await screen.findByRole('list');
-    expect(dropdownList).toBeInTheDocument();
+      const dropdownList = await screen.findByRole('list');
+      expect(dropdownList).toBeInTheDocument();
 
-    const listItem = await screen.findByText('Canada');
-    expect(listItem).toBeInTheDocument();
-});
+      const listItem = await screen.findByText('Canada');
+      expect(listItem).toBeInTheDocument();
+    });
 
-it('renders DrawerContent when the button is clicked after typing a valid country', async () => {
-    render(<Home />);
-    
-    // Simulate typing 'Canada' into the input field
-    const inputField = screen.getByRole('textbox');
-    fireEvent.change(inputField, { target: { value: 'Canada' } });
+    it('renders DrawerContent when a valid country is selected', async () => {
+      render(<Home />);
+      
+      // Simulate typing 'Canada' into the input field
+      const inputField = screen.getByRole('textbox');
+      fireEvent.change(inputField, { target: { value: 'Canada' } });
 
-    // Wait for the button to be enabled (if there's any delay)
-    const button = await screen.findByTestId('drawer-button', {}, { timeout: 1000 });
-    fireEvent.click(button);
+      // Wait for the button to be enabled and simulate a click
+      const button = await screen.findByTestId('drawer-button', {}, { timeout: 1000 });
+      fireEvent.click(button);
 
-    // Check if 'Canada' is present in DrawerContent
-    const drawerContentElement = await screen.findByText('Canada');
-    expect(drawerContentElement).toBeInTheDocument(); 
+      // Check if 'Canada' is present in DrawerContent
+      const drawerContentElement = await waitFor(() => screen.findByText('Ottawa'));
+      expect(drawerContentElement).toBeInTheDocument();
+    });
+  });
 });

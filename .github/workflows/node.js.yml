@@ -19,8 +19,14 @@ jobs:
         node-version: 16.x
         cache: 'npm'
 
-    - name: Install Dependencies
+    - name: Install Root Dependencies
       run: npm ci
+
+    - name: Install Client Dependencies
+      run: cd client && npm ci
+
+    - name: Install Server Dependencies
+      run: cd server && npm ci
 
     - name: Run Backend Tests
       run: npm run test-server
