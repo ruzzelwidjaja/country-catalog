@@ -14,11 +14,15 @@ export default function Home() {
 
     const [inputValue, setInputValue] = useState('');
     const [filteredCountries, setFilteredCountries] = useState<CountriesListType[]>([]);
+    const [highlightedIndex, setHighlightedIndex] = useState(0);
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
 
     // State to validate country in input field
     const [isValid, setIsValid] = useState(true); // Disable button
 
     const [countryDetails, setCountryDetails] = useState<CountryDetailsType | null>(null);
+
 
     // To update what is on the input field, and update the dropdown list
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +34,18 @@ export default function Home() {
         country.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredCountries(searchResults);
+    };
+
+    // Highlighted country
+    useEffect(() => {
+        setHighlightedIndex(0);
+    }, [filteredCountries]);
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && filteredCountries.length > 0) {
+          e.preventDefault(); // Prevent form submission
+          handleCountryClick(filteredCountries[highlightedIndex].name);
+        }
     };
 
     // x button to clear out input field & dropdown list
@@ -74,6 +90,11 @@ export default function Home() {
         }
     }, [inputValue]);
 
+    // Function to handle input focus
+    const handleInputFocus = () => {
+        setFilteredCountries(countries_list); // Show all countries when input is focused
+    };
+
 
     return (
         // <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[100vh]">
@@ -88,8 +109,11 @@ export default function Home() {
                     <div className="flex mb-2">
                         <Input 
                             inputValue={inputValue} 
-                            handleInputChange={handleInputChange} 
+                            handleInputChange={handleInputChange}
+                            handleInputFocus={handleInputFocus}
                             clearInput={clearInput}
+                            onKeyDown={handleKeyDown}
+
                         />
                         <MyDrawer 
                             onButtonClick={handleButtonClick} 
@@ -97,7 +121,14 @@ export default function Home() {
                             isValid={isValid}
                         />
                     </div>
-                    <CountriesList filteredCountries={filteredCountries} handleCountryClick={handleCountryClick} />
+                    <CountriesList 
+                        filteredCountries={filteredCountries} 
+                        handleCountryClick={handleCountryClick} 
+                        highlightedIndex={highlightedIndex}
+                        hoveredIndex={hoveredIndex}
+                        setHoveredIndex={setHoveredIndex}
+
+                    />
                 </form>
 
             </div>
