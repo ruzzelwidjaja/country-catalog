@@ -35,6 +35,7 @@ export function MyDrawer({ onButtonClick, countryDetails, isValid }: DrawerProps
               ? <DrawerContentSkeleton />
               : <DrawerContent countryDetails={countryDetails}/>
             }
+            {/* <DrawerContentSkeleton /> */}
           </Drawer.Content>
       </Drawer.Portal>
     </Drawer.Root>
