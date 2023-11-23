@@ -26,12 +26,13 @@ export default function Home() {
 
     // To update what is on the input field, and update the dropdown list
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const searchQuery = e.target.value;
+        const searchQuery = e.target.value.toLowerCase();
         setInputValue(searchQuery);
     
         // Filter the countries list based on the input
         const searchResults = countries_list.filter(country =>
-        country.name.toLowerCase().includes(searchQuery.toLowerCase())
+        country.name.toLowerCase().includes(searchQuery) || 
+        country.continent.toLowerCase().includes(searchQuery)        
         );
         setFilteredCountries(searchResults);
     };

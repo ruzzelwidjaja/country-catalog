@@ -21,7 +21,7 @@ export const Input: React.FC<searchInputProps> =
     onKeyDown,
   }) => {
     return (
-    <div className="relative w-full mr-1.5">
+    <div className="relative w-[17rem] mr-1.5">
 
       <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
         <Search strokeWidth={2.2} className='w-[1.05rem] h-[1.05rem]' />
@@ -34,10 +34,10 @@ export const Input: React.FC<searchInputProps> =
         onChange={handleInputChange}
         onFocus={handleInputFocus}
         onKeyDown={onKeyDown}
-        className={`text-primary text-[0.9rem] w-full p-[0.4512rem] rounded-md pl-[2.15rem] bg-background placeholder-muted-foreground 
+        className={`text-primary text-[16px] w-full p-[0.4512rem] rounded-md pl-[2.15rem] bg-background placeholder-muted-foreground 
                     border-2 border-input focus:border-indigo-500 focus:outline-none focus:bg-bgHover
                     hover:bg-bgHover hover:border-[#9e8cfc]`}
-        placeholder="Search for a country"
+        placeholder="Search by name/continent"
       />
 
       {inputValue && (

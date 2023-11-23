@@ -12,7 +12,7 @@ export function Links({ countryDetails }: { countryDetails: CountryDetailsType |
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 px-6 pt-4">
+    <div className="grid grid-cols-2 md:grid-cols-5 px-6 pt-4 mb-32">
       {countryDetails && (
         <>
           {/* Google Search Link */}

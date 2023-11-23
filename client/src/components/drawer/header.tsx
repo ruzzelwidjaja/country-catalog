@@ -32,15 +32,8 @@ export function Header({countryDetails}: { countryDetails: CountryDetailsType | 
 
       <hr className="mt-6 mb-4 w-11/12 mx-auto"/>
       
-      {/* Languages */}
-      <div className="ml-2">
-        <span className="text-grayLD pr-4">Language(s)</span>
-        <span className="text-foreground font-semibold">
-          {Object.values(countryDetails?.languages ?? {}).join(", ") || "Unknown"}
-        </span>
-      </div>
+      
 
-      <hr className="mt-4 mb-3 w-11/12 mx-auto"/>
     </header>
   );
 }

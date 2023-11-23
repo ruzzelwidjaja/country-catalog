@@ -1,4 +1,4 @@
-import { Drawer } from "vaul";
+// import { Drawer } from "vaul";
 
 function InfoItemSkeleton () {
   return (
@@ -12,7 +12,7 @@ function InfoItemSkeleton () {
 
 export function DrawerContentSkeleton() {
     return (
-      <Drawer.Content className="bg-zinc-200 flex flex-col rounded-t-[10px] h-[96%] mt-24 fixed bottom-0 left-0 right-0">
+      <body>
         <div className="p-4 bg-background rounded-t-[10px] flex-1">
           <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-500 mb-4" />
           <div className="max-w-sm mx-auto md:max-w-xl px-2">
@@ -62,6 +62,6 @@ export function DrawerContentSkeleton() {
 
         </div>
 
-      </Drawer.Content>
+      </body>
     );
   }
