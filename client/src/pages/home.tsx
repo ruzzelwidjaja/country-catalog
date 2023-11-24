@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { countries_list } from "@/lib/config/countries_list";
 import { CountriesListType, CountryDetailsType } from "@/lib/types";
@@ -42,12 +42,27 @@ export default function Home() {
         setHighlightedIndex(0);
     }, [filteredCountries]);
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter' && filteredCountries.length > 0) {
-          e.preventDefault(); // Prevent form submission
-          handleCountryClick(filteredCountries[highlightedIndex].name);
-        }
-    };
+
+    const drawerButtonRef = useRef<HTMLButtonElement>(null);
+
+    // const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    //     if (event.key === "Enter" && filteredCountries.length > 0) {
+    //         event.preventDefault(); // Prevent the default form submission
+    //         const firstCountry = filteredCountries[0].name;
+    //         setInputValue(firstCountry); // Set the input to the first country in the list
+    //         handleCountryClick(firstCountry); // Update the country details
+    //         drawerButtonRef.current?.click(); // Trigger the drawer to open
+    //     }
+    // };
+
+    // const handleKeyDown = (e: React.KeyboardEvent) => {
+    //     if (e.key === 'Enter' && filteredCountries.length > 0) {
+    //       e.preventDefault(); // Prevent form submission
+    //       handleCountryClick(filteredCountries[highlightedIndex].name);
+    //     //   handleButtonClick();
+    //     }
+    // };
+
 
     // x button to clear out input field & dropdown list
     const clearInput = () => { 
@@ -91,15 +106,46 @@ export default function Home() {
         }
     }, [inputValue]);
 
+    useEffect(() => {
+        const isValidCountry = countries_list.some(country => 
+          country.name.toLowerCase() === inputValue.toLowerCase()
+        );
+      
+        if (isValidCountry) {
+          handleButtonClick(); // Trigger the drawer to open
+          drawerButtonRef.current?.click();
+        }
+      }, [inputValue, handleButtonClick]);
+      
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && filteredCountries.length > 0) {
+        event.preventDefault();
+        const firstCountry = filteredCountries[0].name;
+        setInputValue(firstCountry); // This will trigger the useEffect
+        drawerButtonRef.current?.click();
+    }
+    };
+    
+
     // Function to handle input focus
     const handleInputFocus = () => {
-        setFilteredCountries(countries_list); // Show all countries when input is focused
+        // setFilteredCountries(countries_list); // Show all countries when input is focused
+        if (!inputValue) {
+            setFilteredCountries(countries_list); // Show all countries when input is empty and focused
+          } else {
+            // Keep the filtered list based on the current input value
+            const searchResults = countries_list.filter(country =>
+              country.name.toLowerCase().includes(inputValue.toLowerCase()) || 
+              country.continent.toLowerCase().includes(inputValue.toLowerCase())        
+            );
+            setFilteredCountries(searchResults);
+        }
     };
 
 
     return (
         // <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[100vh]">
-        <main className="flex flex-col items-center justify-center bg-cover bg-center h-screen min-h-screen md:min-h-screen">
+        <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[86vh] md:min-h-screen">
 
             <div style={{ position: 'fixed', top: '1rem', right: '1rem' }}>
                 <ModeToggle />
@@ -114,9 +160,9 @@ export default function Home() {
                             handleInputFocus={handleInputFocus}
                             clearInput={clearInput}
                             onKeyDown={handleKeyDown}
-
                         />
                         <MyDrawer 
+                            ref={drawerButtonRef}
                             onButtonClick={handleButtonClick} 
                             countryDetails={countryDetails} 
                             isValid={isValid}

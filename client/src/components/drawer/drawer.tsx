@@ -1,3 +1,5 @@
+import React, { forwardRef } from 'react';
+
 import { Drawer } from "vaul";
 import { Button } from '../ui/button';
 import { ChevronRight } from 'lucide-react';
@@ -13,11 +15,13 @@ interface DrawerProps {
   isValid: boolean;
 }
 
-export function MyDrawer({ onButtonClick, countryDetails, isValid }: DrawerProps) {
+// export function MyDrawer({ onButtonClick, countryDetails, isValid }: DrawerProps) {
+export const MyDrawer = forwardRef<HTMLButtonElement, DrawerProps>(({ onButtonClick, countryDetails, isValid }, ref) => {
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
         <Button
+          ref={ref}
           testId="drawer-button"
           variant="outline" 
           size="icon" 
@@ -41,3 +45,4 @@ export function MyDrawer({ onButtonClick, countryDetails, isValid }: DrawerProps
     </Drawer.Root>
   );
 }
+);
