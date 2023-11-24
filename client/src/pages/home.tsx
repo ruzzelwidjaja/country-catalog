@@ -20,6 +20,7 @@ export default function Home() {
 
     // State to validate country in input field
     const [isValid, setIsValid] = useState(true); // Disable button
+    const [errorMessage, setErrorMessage] = useState('');
 
     const [countryDetails, setCountryDetails] = useState<CountryDetailsType | null>(null);
 
@@ -28,6 +29,7 @@ export default function Home() {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const searchQuery = e.target.value.toLowerCase();
         setInputValue(searchQuery);
+        setErrorMessage('');
     
         // Filter the countries list based on the input
         const searchResults = countries_list.filter(country =>
@@ -83,6 +85,7 @@ export default function Home() {
         setInputValue(country);
         setFilteredCountries([]); // to clear the dropdown list
         setIsValid(true); // enable button click (country is definitely valid as it's from dropdown list)
+        setErrorMessage(''); // reset the error message
     }
     
 
@@ -104,6 +107,10 @@ export default function Home() {
             setIsValid(false); // disable button
             setCountryDetails(null); // Reset or handle invalid country
         }
+
+        if (!isValidCountry) {
+            setErrorMessage('Please enter a valid country!');
+        }
     }, [inputValue]);
 
     useEffect(() => {
@@ -118,13 +125,26 @@ export default function Home() {
       }, [inputValue, handleButtonClick]);
       
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && filteredCountries.length > 0) {
-        event.preventDefault();
-        const firstCountry = filteredCountries[0].name;
-        setInputValue(firstCountry); // This will trigger the useEffect
-        drawerButtonRef.current?.click();
-    }
+        if (event.key === "Enter") {
+            event.preventDefault();
+    
+            // Check if the current input can autocomplete to a valid country
+            const matchedCountry = countries_list.find(country =>
+                country.name.toLowerCase().startsWith(inputValue.toLowerCase())
+            );
+    
+            if (matchedCountry) {
+                setInputValue(matchedCountry.name); // Auto-complete the input field
+                setErrorMessage(''); // Clear any existing error message
+                // Trigger other necessary actions like opening the drawer
+                drawerButtonRef.current?.click();
+            } else {
+                // Only show error if no valid country is matched
+                setErrorMessage('Please enter a valid country!');
+            }
+        }
     };
+    
 
     function isMobileDevice() {
         return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ||
@@ -191,6 +211,7 @@ export default function Home() {
                                 isValid={isValid}
                             />
                         </div>
+                        {errorMessage && <div className="text-red-500 text-sm mb-2">{errorMessage}</div>}
                         <CountriesList 
                             filteredCountries={filteredCountries} 
                             handleCountryClick={handleCountryClick} 
