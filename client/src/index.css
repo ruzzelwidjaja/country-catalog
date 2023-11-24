@@ -90,3 +90,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+.input-focused {
+  @apply flex flex-col items-center justify-start h-auto;
+}
+
+/* .input-not-focused {
+  @apply flex flex-col items-center justify-center bg-cover bg-center;
+} */
+
+.input-focused-header-hidden {
+  @apply hidden;
+}
+
+.input-focused-top-elements {
+  @apply flex flex-row items-center justify-between w-fit;
+}

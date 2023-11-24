@@ -8,7 +8,7 @@ type searchInputProps = {
   handleInputFocus: () => void;
   clearInput: () => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void; // Add this line
-
+  customStyles?: string;
 };
 
 // export const Input: React.FC<searchInputProps> = ({ inputValue, isValid, handleInputChange }) => {
@@ -19,6 +19,7 @@ export const Input: React.FC<searchInputProps> =
     handleInputFocus,
     clearInput,
     onKeyDown,
+    customStyles,
   }) => {
     return (
     <div className="relative w-[17rem] mr-1.5">
@@ -36,7 +37,7 @@ export const Input: React.FC<searchInputProps> =
         onKeyDown={onKeyDown}
         className={`text-primary text-[16px] w-full p-[0.4512rem] rounded-md pl-[2.15rem] bg-background placeholder-muted-foreground 
                     border-2 border-input focus:border-indigo-500 focus:outline-none focus:bg-bgHover
-                    hover:bg-bgHover hover:border-[#9e8cfc]`}
+                    hover:bg-bgHover hover:border-[#9e8cfc] ${customStyles}`}
         placeholder="Search by name/continent"
       />
 

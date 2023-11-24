@@ -25,7 +25,7 @@ export const MyDrawer = forwardRef<HTMLButtonElement, DrawerProps>(({ onButtonCl
           testId="drawer-button"
           variant="outline" 
           size="icon" 
-          className='w-14 h-[2.65rem] border-2 focus:border-[#9e8cfc] focus:outline-none hover:border-[#9e8cfc]'
+          className='w-[2.65rem] h-[2.65rem] border-2 focus:border-[#9e8cfc] focus:outline-none hover:border-[#9e8cfc]'
           onClick={onButtonClick}
           disabled={!isValid}
         >

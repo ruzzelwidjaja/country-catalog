@@ -125,10 +125,29 @@ export default function Home() {
         drawerButtonRef.current?.click();
     }
     };
-    
 
+    function isMobileDevice() {
+        return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ||
+                window.matchMedia("only screen and (max-width: 760px)").matches ||
+                ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/)));
+    }
+    
+    // In your React component
+    const [isInputFocused, setIsInputFocused] = useState(false);
+    
     // Function to handle input focus
     const handleInputFocus = () => {
+        if (isMobileDevice()) {
+            setIsInputFocused(true);
+            // Scroll the input field into view
+            setTimeout(() => {
+                const inputElement = document.querySelector('input-selector'); // Replace 'input-selector' with the actual selector for your input field.
+                if (inputElement instanceof HTMLElement) {
+                    inputElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 300); // Adjust the timeout as needed
+        }
+
         // setFilteredCountries(countries_list); // Show all countries when input is focused
         if (!inputValue) {
             setFilteredCountries(countries_list); // Show all countries when input is empty and focused
@@ -142,45 +161,51 @@ export default function Home() {
         }
     };
 
-
     return (
         // <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[100vh]">
-        <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[86vh] md:min-h-screen">
-
-            <div style={{ position: 'fixed', top: '1rem', right: '1rem' }}>
+        // <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[86vh] md:min-h-screen">
+        <main 
+            className={`min-h-[100svh] md:min-h-screen ${isInputFocused ? 'input-focused' : 'flex flex-col items-center justify-center bg-cover bg-center'}`}
+        >
+            <div style={{ position: 'fixed', top: '1rem', right: '1rem', display: isInputFocused ? 'none' : 'block' }}>
                 <ModeToggle />
             </div>
-            <div className="mb-20">
-                <Header/>
-                <form className="w-auto flex flex-col items-center relative">
-                    <div className="flex mb-2">
-                        <Input 
-                            inputValue={inputValue} 
-                            handleInputChange={handleInputChange}
-                            handleInputFocus={handleInputFocus}
-                            clearInput={clearInput}
-                            onKeyDown={handleKeyDown}
+            <div className={`md:mb-20`}>
+                {/* <Header/> */}
+                <Header customStyles={` ${isInputFocused ? 'hidden' : ''}`} />
+                <div className={`flex ${isInputFocused ? 'top-4 relative ml-2 max-h-screen justify-start' : 'flex-col items-center'}`}>
+                    <form className="w-auto flex flex-col relative">
+                        <div className="flex flex-row mb-2 mr-[0.35rem]">
+                            <Input
+                                inputValue={inputValue} 
+                                handleInputChange={handleInputChange}
+                                handleInputFocus={handleInputFocus}
+                                clearInput={clearInput}
+                                onKeyDown={handleKeyDown}
+                                customStyles={`${isInputFocused ? 'w-full' : ''}`}
+                            />
+                            <MyDrawer 
+                                ref={drawerButtonRef}
+                                onButtonClick={handleButtonClick} 
+                                countryDetails={countryDetails} 
+                                isValid={isValid}
+                            />
+                        </div>
+                        <CountriesList 
+                            filteredCountries={filteredCountries} 
+                            handleCountryClick={handleCountryClick} 
+                            highlightedIndex={highlightedIndex}
+                            hoveredIndex={hoveredIndex}
+                            setHoveredIndex={setHoveredIndex}
                         />
-                        <MyDrawer 
-                            ref={drawerButtonRef}
-                            onButtonClick={handleButtonClick} 
-                            countryDetails={countryDetails} 
-                            isValid={isValid}
-                        />
-                    </div>
-                    <CountriesList 
-                        filteredCountries={filteredCountries} 
-                        handleCountryClick={handleCountryClick} 
-                        highlightedIndex={highlightedIndex}
-                        hoveredIndex={hoveredIndex}
-                        setHoveredIndex={setHoveredIndex}
-
-                    />
-                </form>
-
+                    </form>
+                    {isInputFocused && (
+                        <div className="mr-2">
+                            <ModeToggle />
+                        </div>
+                    )}
+                </div>
             </div>
-            
-
         </main> 
     )
 }
