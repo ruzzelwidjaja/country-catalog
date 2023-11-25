@@ -4,11 +4,13 @@ import { countries_list } from "@/lib/config/countries_list";
 import { CountriesListType, CountryDetailsType } from "@/lib/types";
 import { fetchCountryData } from "@/lib/cache";
 
-import { MyDrawer } from "@/components/drawer/drawer";
 import { ModeToggle } from "@/components/home/mode-toggle";
-import { Input } from "@/components/ui/input";
+import DummyContent from '@/components/home/dummyContent';
 import { Header } from "@/components/home/header";
 import { CountriesList } from "@/components/home/countriesList";
+import { Input } from "@/components/ui/input";
+import { MyDrawer } from "@/components/drawer/drawer";
+
 
 export default function Home() {
 
@@ -47,25 +49,6 @@ export default function Home() {
 
     const drawerButtonRef = useRef<HTMLButtonElement>(null);
 
-    // const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    //     if (event.key === "Enter" && filteredCountries.length > 0) {
-    //         event.preventDefault(); // Prevent the default form submission
-    //         const firstCountry = filteredCountries[0].name;
-    //         setInputValue(firstCountry); // Set the input to the first country in the list
-    //         handleCountryClick(firstCountry); // Update the country details
-    //         drawerButtonRef.current?.click(); // Trigger the drawer to open
-    //     }
-    // };
-
-    // const handleKeyDown = (e: React.KeyboardEvent) => {
-    //     if (e.key === 'Enter' && filteredCountries.length > 0) {
-    //       e.preventDefault(); // Prevent form submission
-    //       handleCountryClick(filteredCountries[highlightedIndex].name);
-    //     //   handleButtonClick();
-    //     }
-    // };
-
-
     // x button to clear out input field & dropdown list
     const clearInput = () => { 
         setInputValue('');
@@ -88,7 +71,6 @@ export default function Home() {
         setErrorMessage(''); // reset the error message
     }
     
-
     const handleButtonClick = useCallback(async () => {
         const isValidCountry = countries_list.some(country => 
             country.name.toLowerCase() === inputValue.toLowerCase()
@@ -145,28 +127,8 @@ export default function Home() {
         }
     };
     
-
-    function isMobileDevice() {
-        return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ||
-                window.matchMedia("only screen and (max-width: 760px)").matches ||
-                ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/)));
-    }
-    
-    // In your React component
-    const [isInputFocused, setIsInputFocused] = useState(false);
-    
     // Function to handle input focus
     const handleInputFocus = () => {
-        if (isMobileDevice()) {
-            setIsInputFocused(true);
-            // Scroll the input field into view
-            setTimeout(() => {
-                const inputElement = document.querySelector('input-selector'); // Replace 'input-selector' with the actual selector for your input field.
-                if (inputElement instanceof HTMLElement) {
-                    inputElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            }, 300); // Adjust the timeout as needed
-        }
 
         // setFilteredCountries(countries_list); // Show all countries when input is focused
         if (!inputValue) {
@@ -181,28 +143,60 @@ export default function Home() {
         }
     };
 
+    const [isMobile, setIsMobile] = useState(false);
+    const [isDummyVisible, setIsDummyVisible] = useState(true);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        const checkIfMobile = () => {
+            return !!(/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+                      window.matchMedia("only screen and (max-width: 760px)").matches ||
+                      ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/)));
+        };
+
+        const mobileStatus = checkIfMobile();
+        setIsMobile(mobileStatus);
+        setIsDummyVisible(mobileStatus); // Set isDummyVisible based on mobile status
+    }, []);
+
+    // New state to toggle visibility
+    useEffect(() => {
+        if (isMobile && !isDummyVisible) {
+            inputRef.current?.focus();
+        }
+    }, [isDummyVisible, isMobile]);
+
+    const handleDummyClick = () => {
+        setIsDummyVisible(false);
+    };
+
+
     return (
-        // <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[100vh]">
-        // <main className="flex flex-col items-center justify-center bg-cover bg-center min-h-[86vh] md:min-h-screen">
-        <main 
-            className={`min-h-[100svh] md:min-h-screen ${isInputFocused ? 'input-focused' : 'flex flex-col items-center justify-center bg-cover bg-center'}`}
+        <main className={`${!isDummyVisible ? 'min-h-[100vh] flex flex-col items-center justify-center bg-cover bg-center' 
+                                            : 'min-h-[100vh] md:min-h-screen flex items-center justify-center'}`}
         >
-            <div style={{ position: 'fixed', top: '1rem', right: '1rem', display: isInputFocused ? 'none' : 'block' }}>
+            {isDummyVisible && isMobile && (
+                <DummyContent onDummyClick={handleDummyClick} />
+            )}
+
+            <div className={`fixed top-4 right-4 ${isMobile && !isDummyVisible ? 'hidden' : ''}`}>
                 <ModeToggle />
             </div>
-            <div className={`md:mb-20`}>
-                {/* <Header/> */}
-                <Header customStyles={` ${isInputFocused ? 'hidden' : ''}`} />
-                <div className={`flex ${isInputFocused ? 'top-4 relative ml-2 max-h-screen justify-start' : 'flex-col items-center'}`}>
-                    <form className="w-auto flex flex-col relative">
+
+            <div className={`${!isDummyVisible ? 'block' : 'hidden'} ${isMobile ? 'absolute top-4' : 'relative'}`}>
+                <Header customStyles={`${isMobile ? 'hidden' : ''}`} />
+                <div className={`flex flex-col items-center ${isMobile ? 'top-4 ml-2' : '' }`}>
+                    <form className="w-auto flex flex-row relative">
                         <div className="flex flex-row mb-2 mr-[0.35rem]">
                             <Input
+                                ref={inputRef}
+                                id="actual-input"
                                 inputValue={inputValue} 
                                 handleInputChange={handleInputChange}
                                 handleInputFocus={handleInputFocus}
                                 clearInput={clearInput}
                                 onKeyDown={handleKeyDown}
-                                customStyles={`${isInputFocused ? 'w-full' : ''}`}
+                                customStyles={`${!isDummyVisible ? 'w-full' : ''}`}
                             />
                             <MyDrawer 
                                 ref={drawerButtonRef}
@@ -211,20 +205,19 @@ export default function Home() {
                                 isValid={isValid}
                             />
                         </div>
-                        {errorMessage && <div className="text-red-500 text-sm mb-2">{errorMessage}</div>}
-                        <CountriesList 
+                        {isMobile && (
+                            <div className="mr-2"><ModeToggle/></div>
+                        )}
+                    </form>
+                    {errorMessage && <div className="text-red-500 text-sm mb-2">{errorMessage}</div>}
+
+                    <CountriesList 
                             filteredCountries={filteredCountries} 
                             handleCountryClick={handleCountryClick} 
                             highlightedIndex={highlightedIndex}
                             hoveredIndex={hoveredIndex}
                             setHoveredIndex={setHoveredIndex}
                         />
-                    </form>
-                    {isInputFocused && (
-                        <div className="mr-2">
-                            <ModeToggle />
-                        </div>
-                    )}
                 </div>
             </div>
         </main> 

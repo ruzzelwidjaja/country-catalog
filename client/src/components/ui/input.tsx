@@ -9,18 +9,22 @@ type searchInputProps = {
   clearInput: () => void;
   onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void; // Add this line
   customStyles?: string;
+  id:string;
 };
 
 // export const Input: React.FC<searchInputProps> = ({ inputValue, isValid, handleInputChange }) => {
-export const Input: React.FC<searchInputProps> = 
-  ({ 
+export const Input = React.forwardRef<HTMLInputElement, searchInputProps>((
+  { 
     inputValue, 
     handleInputChange, 
     handleInputFocus,
     clearInput,
     onKeyDown,
     customStyles,
-  }) => {
+    id,
+  }, 
+  ref // This is where the ref is now received
+) => {
     return (
     <div className="relative w-[17rem] mr-1.5">
 
@@ -30,6 +34,8 @@ export const Input: React.FC<searchInputProps> =
 
     
       <input
+        ref={ref}
+        id={id}
         type="text"
         value={inputValue}
         onChange={handleInputChange}
@@ -52,4 +58,4 @@ export const Input: React.FC<searchInputProps> =
 
     </div>
   );
-}
+});
