@@ -89,3 +89,17 @@
   animation: scaleIn 0.5s ease-out;
   
 }
+
+.dummy-input-style {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+  /* Add more styling as needed to match your Input component */
+}
