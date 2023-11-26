@@ -14,5 +14,8 @@
     "test-server": "cd server && npm test"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
 }
