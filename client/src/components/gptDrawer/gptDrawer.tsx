@@ -21,7 +21,7 @@ export function GptDrawer({ countryDetails }: DrawerProps) {
 
   useEffect(() => {
     if (progress < 100 && recommendations === '') {
-      const timer = setTimeout(() => setProgress(progress + 8), 500); // Increment by 10% every 500ms
+      const timer = setTimeout(() => setProgress(progress + 1), 100); // Increment by 1% every 100ms
       return () => clearTimeout(timer);
     }
   }, [progress, recommendations]);

@@ -6,8 +6,6 @@ function Paragraph () {
       <div className="h-[1.2rem] w-10/12 mb-2 bg-gray-200 dark:bg-gray-600 rounded animate-pulse"></div>
       <div className="h-[1rem] w-11/12 mb-1 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
       <div className="h-[1rem] w-10/12 mb-1 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
-      <div className="h-[1rem] w-9/12 mb-1 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
-      <div className="h-[1rem] w-11/12 mb-1 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
       <div className="h-[1rem] w-7/12 mb-1 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
       <div className="h-[1rem] w-11/12 mb-1 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
       <div className="h-[1rem] w-full mb-1 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
