@@ -12,7 +12,7 @@ function InfoItemSkeleton () {
 
 export function DrawerContentSkeleton() {
     return (
-      <body className="rounded-t-[10px] h-full">
+      <div className="rounded-t-[10px] h-full">
         <div className="p-4 bg-background flex-1">
           <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-500 mb-4" />
           <div className="max-w-sm mx-auto md:max-w-xl px-2">
@@ -62,6 +62,6 @@ export function DrawerContentSkeleton() {
 
         </div>
 
-      </body>
+      </div>
     );
   }

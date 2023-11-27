@@ -31,10 +31,10 @@ export type CountryDetailsType = {
     };
     unMember: boolean; // UN Member? true/false
     population: number;
-    idd: { // Dial Code
-        root: string;
-        suffixes: string[]; // delete maybe
-    };
+    idd: { // Dial code
+        root: string | null;
+        suffixes?: string[]; // suffixes is optional
+    } | null;
     area: number; // Total Area in km^2
 
     // Lower section

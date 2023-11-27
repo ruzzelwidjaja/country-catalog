@@ -1,5 +1,21 @@
 import { GptFooter } from "./gptFooter";
 
+function LoadingDot({ delay, color }: { delay: string; color: string }) {
+  return (
+    <div className={`h-[6px] w-[6px] ${color} rounded-full animate-bounce ${delay}`}></div>
+  );
+}
+
+function LoadingDots() {
+  return (
+    <div className="flex pt-3 ml-2 space-x-1">
+      <LoadingDot delay="delay-0" color="bg-indigo-600 dark:bg-indigo-400" />
+      <LoadingDot delay="delay-150" color="bg-indigo-700 dark:bg-indigo-500" />
+      <LoadingDot delay="delay-300" color="bg-indigo-800 dark:bg-indigo-600" />
+    </div>
+  );
+}
+
 function Paragraph () {
   return (
     <div className="flex flex-col mb-4">
@@ -16,30 +32,39 @@ function Paragraph () {
 
 export const GptDrawerContentSkeleton = () => {
     return (
-      <body className="h-full">
+      <section className="h-full">
         <div className="p-4 bg-background flex-1">
           <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-500 mb-4" />
           <div className="max-w-sm mx-auto md:max-w-xl px-2">
             {/* Header */}
-            <header className="pt-4 pl-4 mx-4">
+            {/* <header className="pt-4 pl-4 mx-4">
               <div className="pr-5 h-[1.78rem] w-10/12 bg-gray-200 dark:bg-gray-600 rounded animate-pulse"></div>
               <hr className="my-4 w-11/12 mx-auto"/>              
+            </header> */}
+            <header className="pt-4 pl-4 mx-4">
+              <div className="flex items-center text-2xl font-medium">
+                {/* <span> Crafting unique travel insights just for you... </span><LoadingDots /> */}
+                <span className="text-indigo-600 dark:text-indigo-400">Generating guide</span>
+                <LoadingDots />
+              </div>
             </header>
 
+            <hr className="mt-3 mb-[17px] w-11/12 mx-auto"/>              
+
             {/* Body */}
-            <body className="flex flex-col px-4">
+            <div className="flex flex-col px-4">
               <Paragraph/>
               <Paragraph/>
               <Paragraph/>
               <Paragraph/>
-            </body>
+            </div>
           </div>
         </div>
 
         <div className="fixed bottom-0 inset-x-0 mt-auto">
           <GptFooter/>
         </div>
-      </body>
+      </section>
     );
   };
   

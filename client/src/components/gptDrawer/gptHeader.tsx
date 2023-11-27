@@ -4,7 +4,7 @@ export function GptHeader({ countryDetails }: { countryDetails: CountryDetailsTy
   return (
     <header className="flex mr-4 ml-2 pl-4">
       <h1 className="font-medium text-2xl">
-        Travel Guide to {countryDetails?.name.common ?? "Country"}
+        <span className="text-indigo-600 dark:text-indigo-400">Travel Guide to</span> {countryDetails?.name.common ?? "Country"}
       </h1>
     </header>
   );

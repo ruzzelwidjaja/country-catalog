@@ -24,7 +24,7 @@ export function DrawerContent({ countryDetails }: DrawerContentProps) {
 
   return (
 
-    <body className="rounded-t-[10px] h-full">
+    <section className="rounded-t-[10px] h-full bg-background">
       <div className="mt-4 mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-500 mb-8" />
 
       <div className="pb-4 px-6 mx-auto bg-background flex-1 overflow-y-auto overflow-x-hidden h-full max-w-sm md:max-w-xl ">
@@ -46,6 +46,6 @@ export function DrawerContent({ countryDetails }: DrawerContentProps) {
       <div className="fixed bottom-0 inset-x-0 mt-auto">
         <Footer/>
       </div>
-    </body>
+    </section>
   )
 }
