@@ -5,8 +5,9 @@ export const GptFooter: React.FC = () => {
     <div className="p-4 border-t mt-auto bg-zinc-100 border-zinc-200 dark:bg-zinc-800 dark:border-zinc-600">
         <div className="flex justify-between items-center max-w-md mx-auto">
           
-          {/* Powered by GPT-3.5 text */}
-          <span className="text-xs text-zinc-600 dark:text-zinc-400">
+          {/* Powered by GPT text */}
+          {/* <span className="text-xs text-zinc-600 dark:text-zinc-400"> */}
+          <span className="text-xs text-indigo-600 dark:text-indigo-400">
             Powered by GPT-4
           </span>
 
