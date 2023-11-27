@@ -11,10 +11,7 @@ const gptCache: GptCacheType = {};
  * Throws an error if the API URL is not defined or the network response is not ok.
  */
 export const fetchTravelRecommendations = async (countryName: string): Promise<TravelRecommendationsType> => {
-  const apiUrl = import.meta.env.VITE_API_URL;
-  if (!apiUrl) {
-    throw new Error('API URL is not defined in environment variables');
-  }
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
   // Return cached data if available
   if (gptCache[countryName]) {

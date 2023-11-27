@@ -101,5 +101,8 @@
   font-size: 1rem;
   background-color: white;
   cursor: pointer;
-  /* Add more styling as needed to match your Input component */
+}
+
+div:focus, section:focus {
+  outline: none;
 }

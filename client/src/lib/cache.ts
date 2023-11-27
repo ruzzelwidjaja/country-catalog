@@ -11,11 +11,8 @@ const countryCache: CacheType = {};
  * Throws an error if the API URL is not defined or the network response is not ok.
  */
 export const fetchCountryData = async (countryName: string): Promise<CountryDetailsType> => {
-  // Ensure API URL is defined
-  const apiUrl = import.meta.env.VITE_API_URL;
-  if (!apiUrl) {
-    throw new Error('API URL is not defined in environment variables');
-  }
+  // Set API URL to VITE_API_URL or default to localhost:3001
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
   // Return cached data if available
   if (countryCache[countryName]) {
