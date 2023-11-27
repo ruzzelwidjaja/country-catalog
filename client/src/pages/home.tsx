@@ -28,8 +28,8 @@ export default function Home() {
     } = useHome();
 
     return (
-        <main className={`${!isDummyVisible ? 'min-h-[100vh] flex flex-col items-center justify-center bg-cover bg-center' 
-                                            : 'min-h-[100vh] md:min-h-screen flex items-center justify-center'}`}>
+        <main className={`antialiased ${!isDummyVisible ? 'min-h-[100vh] flex flex-col items-center justify-center bg-cover bg-center' 
+                                                         : 'min-h-[100vh] md:min-h-screen flex items-center justify-center'}`}>
             {/* Dummy header, input field, and button */}
             {isDummyVisible && isMobile && (
                 <DummyContent onDummyClick={handleDummyClick} />

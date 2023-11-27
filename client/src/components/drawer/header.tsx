@@ -27,7 +27,7 @@ export function Header({countryDetails}: { countryDetails: CountryDetailsType | 
       
       {/* Capital Cities */}
       <p className="text-zinc-600 dark:text-zinc-400 pl-4">
-        {countryDetails?.capital.join(", ") ?? "Unknown"}
+        {countryDetails?.capital?.length ? countryDetails.capital.join(", ") : "No Capital"}
       </p>
 
       <hr className="mt-6 mb-4 w-11/12 mx-auto"/>

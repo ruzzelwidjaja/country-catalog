@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const { generateTravelRecommendations } = require('./gptService');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -34,6 +35,18 @@ app.get('/country/:name', async (req, res) => {
   } catch (error) {
     console.error('Error fetching country data:', error.message);
     res.status(500).json({ message: "Error fetching country data" });
+  }
+});
+
+// GPT API Route
+app.get('/travel/:countryName', async (req, res) => {
+  const countryName = req.params.countryName;
+  try {
+    const recommendations = await generateTravelRecommendations(countryName);
+    res.json({ recommendations });
+  } catch (error) {
+    console.error('Error generating travel recommendations:', error.message);
+    res.status(500).json({ message: "Error generating travel recommendations" });
   }
 });
 

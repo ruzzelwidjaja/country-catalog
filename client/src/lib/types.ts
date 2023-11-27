@@ -48,6 +48,13 @@ export type CountryDetailsType = {
     }
 }
 
+export interface TravelRecommendationsType {
+    recommendations: {
+      role: string;
+      content: string;
+    };
+  }
+
 export type test = {
     halo: string;
 }

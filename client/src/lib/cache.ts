@@ -29,7 +29,16 @@ export const fetchCountryData = async (countryName: string): Promise<CountryDeta
   }
 
   const data: CountryDetailsType[] = await response.json();
-  const countryData = data[0];
+  // const countryData = data[0];
+
+  // Find the correct country data
+  const countryData = data.find(country => 
+    country.name.common.toLowerCase() === countryName.toLowerCase()
+  );
+
+  if (!countryData) {
+    throw new Error(`Country not found: ${countryName}`);
+  }
   
   // Cache the fetched data
   countryCache[countryName] = countryData;
