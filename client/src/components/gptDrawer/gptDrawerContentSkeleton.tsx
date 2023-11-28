@@ -32,8 +32,8 @@ function Paragraph () {
 
 export const GptDrawerContentSkeleton = () => {
     return (
-      <section className="h-full">
-        <div className="p-4 bg-background flex-1">
+      <section className="h-full bg-background">
+        <div className="p-4 flex-1">
           <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 dark:bg-zinc-500 mb-4" />
           <div className="max-w-sm mx-auto md:max-w-xl px-2">
             {/* Header */}
@@ -47,7 +47,7 @@ export const GptDrawerContentSkeleton = () => {
                 <span className="text-indigo-600 dark:text-indigo-400">Generating guide</span>
                 <LoadingDots />
               </div>
-            </header>
+            </header> 
 
             <hr className="mt-3 mb-[17px] w-11/12 mx-auto"/>              
 
