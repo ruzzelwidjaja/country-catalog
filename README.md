@@ -8,7 +8,7 @@ Link:
 
 <div style="display: flex; justify-content: space-around;">
   <img src="./readme-demo/wide.gif" alt="Demo Wide" width="508" />
-  <img src="./readme-demo/mobile.gif" alt="Demo Mobile" width="192" />
+  <img src="./readme-demo/mobile.gif" alt="Demo Mobile" width="197" />
 </div>
 
 ## 🌟 Features 
