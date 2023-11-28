@@ -1,5 +1,7 @@
 import { useHome } from '@/lib/useHome';
 
+import { countries_list } from '@/lib/config/countries_list';
+
 import { ModeToggle } from '@/components/home/mode-toggle';
 import DummyContent from '@/components/home/dummyContent';
 import { Header } from '@/components/home/header';
@@ -13,6 +15,7 @@ export default function Home() {
         filteredCountries, setFilteredCountries,
         highlightedIndex,
         hoveredIndex,setHoveredIndex,
+        filteredSearchHistory,
         isValid,
         errorMessage,
         countryDetails,
@@ -54,7 +57,8 @@ export default function Home() {
                                 handleInputFocus={handleInputFocus}
                                 clearInput={() => {
                                     setInputValue('');
-                                    setFilteredCountries([]);
+                                    setFilteredCountries(countries_list);
+                                    inputRef.current?.focus();
                                 }}
                                 onKeyDown={handleKeyDown}
                                 customStyles={`${!isDummyVisible ? 'w-full' : ''}`}
@@ -76,6 +80,7 @@ export default function Home() {
                     {/* Dropdown list */}
                     <CountriesList 
                         filteredCountries={filteredCountries} 
+                        searchHistory={filteredSearchHistory}
                         handleCountryClick={handleCountryClick} 
                         highlightedIndex={highlightedIndex}
                         hoveredIndex={hoveredIndex}

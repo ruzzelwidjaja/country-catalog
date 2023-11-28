@@ -55,8 +55,6 @@ export const GptDrawerContentSkeleton = () => {
             <div className="flex flex-col px-4">
               <Paragraph/>
               <Paragraph/>
-              <Paragraph/>
-              <Paragraph/>
             </div>
           </div>
         </div>

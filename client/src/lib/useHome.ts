@@ -12,7 +12,12 @@ export const useHome = () => {
 
     const [filteredCountries, setFilteredCountries] = useState<CountriesListType[]>([]); // Dropdown list
     const [highlightedIndex, setHighlightedIndex] = useState(0); // Highlight first country in dropdown
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null); // Index of hovered country
+    // const [hoveredIndex, setHoveredIndex] = useState(0); // Index of hovered country
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
+
+    const [searchHistory, setSearchHistory] = useState<CountryDetailsType[]>([]);
+    const [filteredSearchHistory, setFilteredSearchHistory] = useState<CountryDetailsType[]>([]);
+
 
     const [errorMessage, setErrorMessage] = useState(''); // Error message when country entered is not valid
 
@@ -36,7 +41,16 @@ export const useHome = () => {
             country.continent.toLowerCase().includes(searchQuery)
         );
         setFilteredCountries(searchResults);
-    }, []);
+
+        // Filter the search history based on the input
+        const historyResults = searchHistory.filter(country =>
+            country.name.common.toLowerCase().includes(searchQuery)
+        );
+        setFilteredSearchHistory(historyResults);
+
+        // Reset highlightedIndex to 0 whenever the input changes
+        setHighlightedIndex(0);
+    }, [searchHistory]);
 
     // When a country is clicked from the dropdown list
     const handleCountryClick = useCallback((country: string) => {
@@ -57,6 +71,7 @@ export const useHome = () => {
             try {
                 const data = await fetchCountryData(inputValue);
                 setCountryDetails(data);
+                setSearchHistory(prevHistory => [data, ...prevHistory.filter(h => h.name.common !== data.name.common)]);
             } catch (error) {
                 console.error("Error fetching country details: ", error);
             }
@@ -86,7 +101,7 @@ export const useHome = () => {
     //         handleButtonClick();
     //         drawerButtonRef.current?.click();
     //     }
-    // }, [inputValue, isValid, handleButtonClick]);
+    // }, [inputValue, isValid, handleButtonClick])
     useEffect(() => {
         const isValidCountry = countries_list.some(country => 
             country.name.toLowerCase() === inputValue.toLowerCase()
@@ -117,29 +132,68 @@ export const useHome = () => {
     };
 
     // Autocompletes input field and then triggers drawer button if user presses enter key
+    // const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    //     if (event.key === "Enter") {
+    //         event.preventDefault();
+    //         const totalItems = searchHistory.length + filteredCountries.length;
+    //         // Check if the current input can autocomplete to a valid country
+    //         const matchedCountry = countries_list.find(country =>
+    //             country.name.toLowerCase().startsWith(inputValue.toLowerCase())
+    //         );
+    
+    //         if (matchedCountry) {
+    //             setInputValue(matchedCountry.name); // Autocomplete the input field
+    //             setErrorMessage(''); // Clear any existing error message
+    //             drawerButtonRef.current?.click(); // Trigger drawer button
+    //         } else {
+    //             // Only show error if no valid country is matched
+    //             setErrorMessage('Please enter a valid country!'); 
+    //         }
+    //     }
+    // };
+
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
             event.preventDefault();
-
-            // Check if the current input can autocomplete to a valid country
-            const matchedCountry = countries_list.find(country =>
-                country.name.toLowerCase().startsWith(inputValue.toLowerCase())
-            );
     
-            if (matchedCountry) {
-                setInputValue(matchedCountry.name); // Autocomplete the input field
-                setErrorMessage(''); // Clear any existing error message
+            const totalItems = filteredSearchHistory.length + filteredCountries.length;
+    
+            if (highlightedIndex < totalItems) {
+                // There's an item highlighted in either the search history or filtered countries
+                if (highlightedIndex < filteredSearchHistory.length) {
+                    // Handle selection from filtered search history
+                    const selectedCountry = filteredSearchHistory[highlightedIndex];
+                    setInputValue(selectedCountry.name.common);
+                } else {
+                    // Handle selection from filtered countries
+                    const filteredIndex = highlightedIndex - filteredSearchHistory.length;
+                    const selectedCountry = filteredCountries[filteredIndex];
+                    setInputValue(selectedCountry.name);
+                }
                 drawerButtonRef.current?.click(); // Trigger drawer button
+                setFilteredCountries([]); // Clear the dropdown
             } else {
-                // Only show error if no valid country is matched
-                setErrorMessage('Please enter a valid country!'); 
+                // Handle the case where the input value doesn't match any item
+                const matchedCountry = countries_list.find(country =>
+                    country.name.toLowerCase().startsWith(inputValue.toLowerCase())
+                );
+    
+                if (matchedCountry) {
+                    setInputValue(matchedCountry.name); // Autocomplete the input field
+                    drawerButtonRef.current?.click(); // Trigger drawer button
+                } else {
+                    setErrorMessage('Please enter a valid country!');
+                }
             }
         }
     };
+    
 
     // Function to handle input focus
     const handleInputFocus = () => {
+        console.log("Input Focused");
         if (!inputValue) {
+            console.log("Setting filtered countries to full list")
             setFilteredCountries(countries_list); // Show all countries when input is empty and focused
         } else {
             // Keep the filtered list based on the current input value
@@ -156,6 +210,8 @@ export const useHome = () => {
         filteredCountries, setFilteredCountries,
         highlightedIndex, setHighlightedIndex,
         hoveredIndex, setHoveredIndex,
+        searchHistory,
+        filteredSearchHistory,
         isValid, setIsValid,
         errorMessage, setErrorMessage,
         countryDetails, setCountryDetails,
