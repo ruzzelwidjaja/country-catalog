@@ -1,8 +1,8 @@
 # 🌍 Country Catalog
 
-Country Catalog is a web application that allows users to search for countries and access detailed information about them. It combines a sleek frontend interface with a robust backend to deliver relevant data efficiently.
+Country Catalog is a web application that allows users to search for countries and access detailed information about them, including a generated travel guide using the GPT-4 API. It combines a sleek frontend interface with a robust backend to deliver relevant data efficiently.
 
-Link to project: 
+Link: 
 [https://countrycatalog.vercel.app/](https://countrycatalog.vercel.app/)
 ## 🎥 Demos 
 
@@ -13,10 +13,11 @@ Link to project:
 
 ## 🌟 Features 
 
-- **Country Information:** Search for countries and view detailed information.
-- **Interactive UI:** Drawer animation for displaying country details.
+- **Country Information:** Search for countries and view detailed information including a dynamically generated travel guide.
+- **Interactive UI:** Drawer animation for displaying country details, powered by [Emil Kowalski's Drawer Component](https://vaul.emilkowal.ski/).
 - **Responsive Design:** Optimized for both desktop and mobile devices.
 - **External Links:** Quick access to Google Maps, Twitter, and Google Flights for each country.
+- **Travel Guide Generation:** Create personalized travel guides for each country using the GPT-4 API.
 
 ## 🚀 Getting Started
 
@@ -65,8 +66,9 @@ Make sure to keep both the client and server running to use the application. You
 
 - **Frontend:** React, TypeScript, Tailwind CSS, Framer Motion
 - **Backend:** Node.js, Express
-- **UI Components:** shadcn/ui
-- **Icons:** Lucide icons
+- **UI Components:** shadcn/ui, Vaul by Emil Kowalski
+- **Icons:** Lucide
+- **APIs:** RestCountries, OpenAI (GPT-4)
 - **Testing:**
    - **Frontend:** Vitest
    - **Backend:** Jest
