@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { track } from '@vercel/analytics';
 import { Drawer } from "vaul";
 import { Button } from '../ui/button';
 import { Sparkles } from 'lucide-react';
@@ -27,6 +28,9 @@ export function GptDrawer({ countryDetails }: DrawerProps) {
   }, [progress, recommendations]);
 
   const handleButtonClick = async () => {
+    // Track the event when the button is clicked
+    track('Generate Recommendations', { country: countryDetails?.name?.common || 'Unknown' });
+
     setProgress(10); // Start progress
 
     try {
