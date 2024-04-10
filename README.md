@@ -14,7 +14,6 @@ Country Catalog is a web application that allows users to search for countries a
 ## 🌟 Features 
 
 - **Country Information:** Search for countries and view detailed information including a dynamically generated travel guide.
-- **Interactive UI:** Drawer animation for displaying country details, powered by [Emil Kowalski's Drawer Component](https://vaul.emilkowal.ski/).
 - **Responsive Design:** Optimized for both desktop and mobile devices.
 - **External Links:** Quick access to Google Maps, Twitter, and Google Flights for each country.
 - **Travel Guide Generation:** Create personalized travel guides for each country using the GPT-4 API.
